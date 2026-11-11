@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Until — November 26</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:#07191f;color:#e1e9e5;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}main{position:relative;height:100%;min-height:400px;display:flex;align-items:center;flex-direction:column;padding:0 24px}header{position:absolute;top:40px;left:48px;font-size:11px;letter-spacing:.38em;color:#a9b8b4}header span{display:inline-block;width:5px;height:5px;border-radius:50%;background:#b9d8ce;margin-right:12px;vertical-align:2px;box-shadow:0 0 12px #a3cbb477}.date{position:absolute;right:48px;top:40px;font-size:10px;letter-spacing:.16em;color:#a9b8b4}.content{position:absolute;top:27%;text-align:center;width:100%;padding:0 20px}.eyebrow{font-size:10px;letter-spacing:.4em;color:#a0b5b2;margin:0 0 30px}.timer{display:flex;justify-content:center;align-items:flex-start;gap:clamp(14px,3vw,50px);font-variant-numeric:tabular-nums}.unit{display:flex;flex-direction:column;align-items:center;min-width:100px}.number{font-family:Georgia,'Times New Roman',serif;font-size:clamp(58px,9vw,128px);font-weight:normal;line-height:1;letter-spacing:-.055em;text-shadow:0 2px 35px #b8ded512}.label{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#8ca5a2;margin-top:22px}.separator{font-family:Georgia,serif;font-size:clamp(30px,5vw,65px);line-height:1.5;color:#78949166;font-weight:normal}.caption{font-family:Georgia,serif;font-style:italic;font-size:16px;letter-spacing:.025em;color:#92aaa6;margin-top:42px}.bottom{position:absolute;bottom:35px;left:0;right:0;text-align:center;font-size:9px;letter-spacing:.26em;color:#7d9895}.bottom:before{content:'';display:block;height:28px;width:1px;margin:0 auto 18px;background:linear-gradient(transparent,#688b87)}.complete{display:none;font:italic clamp(35px,6vw,76px) Georgia,serif;letter-spacing:-.03em;margin:0}body.finished .timer{display:none}body.finished .complete{display:block}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:600px){header{top:28px;left:25px}.date{top:28px;right:25px;font-size:8px;letter-spacing:.08em}.content{top:29%}.unit{min-width:51px}.timer{gap:10px}.number{font-size:clamp(49px,12vw,70px)}.label{font-size:7px;letter-spacing:.16em;margin-top:16px}.separator{font-size:30px;line-height:1.5}.eyebrow{font-size:8px;margin-bottom:28px}.caption{font-size:14px;margin-top:30px}.bottom{bottom:28px;font-size:8px}}@media(max-height:520px){.content{top:20%}.caption{margin-top:20px}.bottom{bottom:15px}.bottom:before{display:none}}
+
+body{background:#fff;color:#000}header,.date,.eyebrow,.label,.caption,.bottom{color:#000}header span{background:#0066ff;box-shadow:none}.content{top:18%}.number{font-family:Arial,Helvetica,sans-serif;font-weight:500;letter-spacing:-.075em;text-shadow:none}.separator{color:#000;font-family:Arial,Helvetica,sans-serif;font-weight:300}.caption{display:none}.bottom{color:#000;bottom:30px}.bottom:before{background:#000}.eyebrow{font-weight:400}.complete{font-family:Arial,Helvetica,sans-serif}@media(max-width:600px){.content{top:22%}}@media(max-height:520px){.content{top:16%}.number{font-size:60px}.eyebrow{margin-bottom:16px}.label{margin-top:10px}}
+</style>
+</head>
+<body>
+<canvas id="ocean" aria-hidden="true"></canvas>
+<main>
+<header><span></span>UNTIL</header>
+<div class="date">26 NOV 2026 &nbsp; / &nbsp; 17:00 IST</div>
+<section class="content" aria-label="Countdown to November 26, 2026 at 5 PM India Standard Time">
+<h1 class="eyebrow">EVERY SECOND, AN OCEAN.</h1>
+<div class="timer" role="timer" aria-live="off">
+<div class="unit"><span class="number" id="days">00</span><span class="label">Days</span></div><span class="separator" aria-hidden="true">:</span>
+<div class="unit"><span class="number" id="hours">00</span><span class="label">Hours</span></div><span class="separator" aria-hidden="true">:</span>
+<div class="unit"><span class="number" id="minutes">00</span><span class="label">Minutes</span></div><span class="separator" aria-hidden="true">:</span>
+<div class="unit"><span class="number" id="seconds">00</span><span class="label">Seconds</span></div>
+</div>
+<p class="complete">The moment is here.</p>
+<p class="caption" id="caption">A little closer, drop by drop.</p>
+<p class="sr-only" id="announcement" aria-live="polite"></p>
+</section>
+<footer class="bottom">LET TIME MAKE ITS RIPPLES</footer>
+</main>
+<script>
+'use strict';
+const TARGET=Date.parse('2026-11-26T17:00:00+05:30');
+function remaining(now){const total=Math.max(0,Math.ceil((TARGET-now)/1000));return {total,days:Math.floor(total/86400),hours:Math.floor(total/3600)%24,minutes:Math.floor(total/60)%60,seconds:total%60};}
+const canvas=document.getElementById('ocean'),ctx=canvas.getContext('2d');
+const motion=matchMedia('(prefers-reduced-motion: reduce)');
+let w=0,h=0,lastSecond=-1,ripples=[],finished=false;
+function resize(){w=innerWidth;h=innerHeight;const dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);}
+addEventListener('resize',resize);resize();
+function update(now){const value=remaining(now);for(const key of ['days','hours','minutes','seconds'])document.getElementById(key).textContent=String(value[key]).padStart(2,'0');if(value.total===0&&!finished){finished=true;document.body.classList.add('finished');document.getElementById('caption').textContent='Every drop brought us here.';document.getElementById('announcement').textContent='The moment is here. The countdown is complete.';}return value.total;}
+
+function background(t){
+ ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+ const waterY=h*.78;
+ ctx.beginPath();ctx.moveTo(0,waterY);
+ for(let x=0;x<=w+12;x+=12){ctx.lineTo(x,waterY+Math.sin(x/w*9+t*.0007)*5+Math.sin(x/w*17-t*.0004)*2);}
+ ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();
+ const sea=ctx.createLinearGradient(0,waterY,0,h);sea.addColorStop(0,'#c8e8ff');sea.addColorStop(1,'#f1f9ff');ctx.fillStyle=sea;ctx.fill();
+ ctx.beginPath();for(let x=0;x<=w+12;x+=12){const y=waterY+Math.sin(x/w*9+t*.0007)*5+Math.sin(x/w*17-t*.0004)*2;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.strokeStyle='#1682f5';ctx.lineWidth=1.4;ctx.stroke();
+}
+function drawRipple(x,y,age){const p=age/3300;if(p<0||p>1)return;for(let i=0;i<3;i++){const radius=12+p*Math.min(w*.6,570)-i*17;if(radius<=0)continue;ctx.beginPath();ctx.ellipse(x,y,radius,radius*.15,0,0,Math.PI*2);ctx.strokeStyle='rgba(0,105,245,'+((1-p)*(.65-i*.15))+')';ctx.lineWidth=1.8-i*.4;ctx.stroke();}}
+function drop(x,y,size,alpha){ctx.save();ctx.translate(x,y);ctx.scale(size,size);ctx.globalAlpha=alpha;ctx.beginPath();ctx.moveTo(0,-1.7);ctx.bezierCurveTo(-.25,-1.03,-1,-.36,-1,.2);ctx.bezierCurveTo(-1,1.42,1,1.42,1,.2);ctx.bezierCurveTo(1,-.36,.25,-1.03,0,-1.7);ctx.closePath();const blue=ctx.createLinearGradient(-1,-.8,1,1);blue.addColorStop(0,'#3d9aff');blue.addColorStop(.5,'#0874ff');blue.addColorStop(1,'#0049da');ctx.fillStyle=blue;ctx.fill();ctx.beginPath();ctx.ellipse(-.36,.15,.12,.35,.3,0,Math.PI*2);ctx.fillStyle='#ffffff88';ctx.fill();ctx.restore();}
+function frame(){
+ const now=Date.now(),sec=Math.floor(now/1000),phase=now%1000,impact=760;
+ if(sec!==lastSecond){lastSecond=sec;update(now);}
+ background(motion.matches?0:now);
+ const x=w*.5,y=h*.78+6,size=Math.min(27,w*.06,h*.04);
+ if(motion.matches){drop(x,y-h*.14,size,1);drawRipple(x,y,1400);}else{
+ if(!finished&&phase<impact){const p=phase/impact;drop(x,y-size-h*.23*(1-p*p),size,Math.min(1,p*7));}
+ for(let i=0;i<4;i++){const age=phase-impact+i*1000;if(age>=0&&(!finished||now<TARGET+3300))drawRipple(x,y,age);}
+ if(!finished&&phase>=impact){const p=(phase-impact)/(1000-impact);for(let i=0;i<7;i++){const angle=Math.PI+(i/6)*Math.PI;const distance=25+70*p;const sx=x+Math.cos(angle)*distance,sy=y+Math.sin(angle)*distance*.65+45*p*p;ctx.beginPath();ctx.arc(sx,sy,(1-p)*4+.5,0,Math.PI*2);ctx.fillStyle='rgba(0,105,245,'+(1-p)+')';ctx.fill();}}
+ }
+ requestAnimationFrame(frame);
+}
+update(Date.now());requestAnimationFrame(frame);
+</script>
+</body>
+</html>
