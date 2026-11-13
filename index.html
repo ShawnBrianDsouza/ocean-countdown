@@ -1,71 +1,26 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f7ecd8">
-<title>26 November — Ocean Countdown</title>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f4ee"><title>Vibe Check — Student Checker</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:#d9ccb4;color:#292825;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}body:after{content:'';position:fixed;inset:0;border:10px solid #d9ccb4;pointer-events:none;z-index:3}canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}main{position:relative;height:100%;width:100%;padding:0 4vw}.content{position:absolute;left:0;right:0;top:14%;text-align:center}.eyebrow{margin:0 0 34px;font-size:clamp(10px,1vw,15px);font-weight:500;letter-spacing:.18em;text-transform:uppercase}.timer{display:flex;justify-content:center;gap:1.4vw;font-variant-numeric:tabular-nums}.unit{display:flex;flex-direction:column;align-items:center}.number{font-family:'Arial Black',Arial,Helvetica,sans-serif;font-size:clamp(60px,15.7vw,238px);font-weight:900;line-height:.94;letter-spacing:-.08em;padding-right:.08em}.label{font-size:10px;letter-spacing:.25em;text-transform:uppercase;margin-top:22px;font-weight:600}.separator{font-family:Georgia,serif;font-size:8vw;font-weight:700;line-height:1.3;margin:0 -.5vw}.complete{display:none;font-size:clamp(50px,10vw,150px);font-weight:900;letter-spacing:-.07em;margin:0}body.finished .timer{display:none}body.finished .complete{display:block}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:600px){body:after{border-width:6px}.content{top:20%}.eyebrow{font-size:9px;letter-spacing:.12em;margin-bottom:30px}.number{font-size:16vw}.label{font-size:7px;letter-spacing:.15em;margin-top:16px}.separator{font-size:8vw;line-height:1.5}.timer{gap:1vw}}@media(max-height:500px){.content{top:10%}.eyebrow{margin-bottom:16px}.number{font-size:min(14vw,25vh)}.label{margin-top:10px}}
-</style>
-</head>
+*{box-sizing:border-box}body{margin:0;background:#f6f4ee;color:#242328;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}header{max-width:1240px;margin:auto;padding:30px 42px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:19px;font-weight:800;letter-spacing:-.6px}.brand b{display:inline-grid;place-items:center;width:29px;height:29px;border-radius:9px;background:#6550d9;color:white;margin-right:9px;font-size:20px}.tag{font-size:10px;letter-spacing:1.5px;border:1px solid #d9d6d0;border-radius:30px;padding:10px 14px}main{max-width:1160px;margin:34px auto 50px;display:grid;grid-template-columns:1fr 1fr;gap:75px;padding:0 24px}.intro{padding-top:28px}.eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;color:#6550d9;display:flex;align-items:center;gap:9px}.eyebrow:before{content:'';width:7px;height:7px;border-radius:50%;background:#6550d9}h1{font-size:clamp(55px,6vw,83px);line-height:1.02;letter-spacing:-5px;margin:26px 0 24px;font-weight:800}h1 em{font-family:Georgia,serif;font-weight:400;color:#6550d9}.lead{font-size:15px;color:#6f6b76;line-height:1.8;max-width:340px}.art{height:215px;position:relative;margin-top:25px;max-width:390px}.orbit{position:absolute;border:1px solid #d6d0e9;border-radius:50%;width:300px;height:150px;left:32px;top:42px;transform:rotate(-20deg)}.orbit.two{transform:rotate(28deg)}.ticket{position:absolute;left:90px;top:38px;background:#dfd8fb;width:190px;height:128px;border:1px solid #c9bfef;border-radius:17px;transform:rotate(-9deg);padding:19px;box-shadow:8px 10px 0 #ece8f7}.ticket small{font-size:9px;letter-spacing:1.5px;font-weight:700;color:#6550d9}.ticket strong{display:block;font-size:45px;letter-spacing:-3px;margin-top:10px}.star{position:absolute;font-size:56px;color:#6550d9;right:31px;top:5px}.dot{position:absolute;width:18px;height:18px;background:#d9efb9;border:1px solid #b9cc9f;border-radius:50%;bottom:12px;left:43px}.note{font-size:11px;color:#8a8691;margin-top:20px}.card{background:#fff;border:1px solid #e6e2eb;border-radius:24px;padding:30px;box-shadow:0 12px 45px #27212e05}.cardhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:27px}.cardhead h2{font-size:22px;letter-spacing:-.7px;margin:0}.step{font-size:10px;color:#8c849b;letter-spacing:1px}.field{margin-bottom:23px}label{display:block;font-size:12px;font-weight:700;margin-bottom:10px}label span{font-weight:400;color:#9b95a3;font-size:11px;margin-left:5px}input[type=text],input[type=number],select{display:block;width:100%;padding:15px 16px;border:1px solid #e4e0eb;border-radius:10px;background:#fcfbfd;color:#29232f;outline:none;font-size:14px;height:49px}input::placeholder{color:#aaa3b3}input:focus,select:focus{border-color:#7863d8;box-shadow:0 0 0 3px #7863d818}.row{display:grid;grid-template-columns:1.1fr 1fr;gap:16px}.sliderhead{display:flex;align-items:center;justify-content:space-between}.hoursbadge{font-size:12px;background:#f0ebff;color:#6550d9;border-radius:7px;padding:7px 10px;font-weight:700}input[type=range]{width:100%;margin:18px 0 8px;accent-color:#6550d9;cursor:pointer}.scale{display:flex;justify-content:space-between;font-size:10px;color:#97909f}.submit{border:0;background:#6550d9;color:#fff;border-radius:11px;padding:17px 20px;width:100%;display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:700;cursor:pointer;margin-top:26px;transition:background .15s,transform .15s}.submit:hover{background:#503bc2;transform:translateY(-1px)}button:focus-visible{outline:3px solid #baaaf4;outline-offset:4px}.privacy{text-align:center;font-size:10px;color:#97909f;margin:15px 0 0}.result{margin-top:20px;border-radius:12px;background:#f6f4fa;padding:22px;text-align:center;min-height:82px;display:grid;place-content:center}.result p{margin:0;color:#97909f;font-size:12px}.result strong{font-size:clamp(23px,3vw,33px);letter-spacing:-1px}.result.pass{background:#edf8ef;color:#167637}.result.fail{background:#fff0ef;color:#c23030}footer{max-width:1160px;margin:0 auto;padding:20px 24px 30px;border-top:1px solid #e2ded7;display:flex;justify-content:space-between;font-size:10px;color:#96909b;letter-spacing:.4px}@media(max-width:800px){header{padding:22px 24px}main{gap:30px;margin-top:5px;grid-template-columns:1fr;max-width:540px}.intro{padding-top:5px}h1{font-size:61px;letter-spacing:-3.5px;margin:18px 0}.lead{max-width:100%;font-size:14px}.art,.note{display:none}.card{padding:25px}.tag{font-size:8px;padding:8px 10px}footer{margin:0 24px;padding:20px 0;gap:15px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
 <body>
-<canvas id="ocean" aria-hidden="true"></canvas>
-<main>
-
-<section class="content" aria-label="Countdown to November 26, 2026 at 5 PM India Standard Time">
-<h1 class="eyebrow">26 November 2026 &nbsp;·&nbsp; 5:00 PM IST</h1>
-<div class="timer" role="timer" aria-live="off">
-<div class="unit"><span class="number" id="days">00</span><span class="label">Days</span></div><span class="separator" aria-hidden="true">:</span>
-<div class="unit"><span class="number" id="hours">00</span><span class="label">Hours</span></div><span class="separator" aria-hidden="true">:</span>
-<div class="unit"><span class="number" id="minutes">00</span><span class="label">Minutes</span></div><span class="separator" aria-hidden="true">:</span>
-<div class="unit"><span class="number" id="seconds">00</span><span class="label">Seconds</span></div>
-</div>
-<p class="complete">The moment is here.</p>
-
-<p class="sr-only" id="announcement" aria-live="polite"></p>
-</section>
-
-</main>
+<header><div class="brand"><b>✳</b>vibe check.</div><span class="tag">THE STUDENT EDITION</span></header>
+<main><section class="intro"><div class="eyebrow">A LITTLE REALITY CHECK</div><h1>Big dreams.<br>Small <em>check.</em></h1><p class="lead">Your branch, your grades, your study hours.<br>Put them in. Find out where you stand.</p><div class="art" aria-hidden="true"><div class="orbit"></div><div class="orbit two"></div><div class="ticket"><small>SEMESTER ENERGY</small><strong>A+ vibes</strong></div><span class="star">✳</span><span class="dot"></span></div><p class="note">A fun checker. Not an official academic assessment.</p></section>
+<section class="card" aria-labelledby="form-title"><div class="cardhead"><h2 id="form-title">Let’s check your vibe.</h2><span class="step">01 / 01</span></div>
+<form id="checker">
+<div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" placeholder="Enter your name" required maxlength="100" autocomplete="given-name"></div>
+<div class="row"><div class="field"><label for="branch">Specialization</label><select id="branch" name="branch" required><option value="" disabled selected>Select branch</option value="cse">CSE</option><option value="aiml">AIML</option><option value="it">IT</option><option value="cce">CCE</option></select></div><div class="field"><label for="cgpa">CGPA <span>out of 10</span></label><input id="cgpa" name="cgpa" type="number" min="0" max="10" step="0.01" required placeholder="e.g. 8.5" inputmode="decimal"></div></div>
+<div class="field"><div class="sliderhead"><label for="hours">Average study time <span>per day</span></label><output class="hoursbadge" id="hours-value" for="hours">4 hrs</output></div><input id="hours" name="hours" type="range" min="0" max="24" step="1" value="4" aria-valuetext="4 hours per day"><div class="scale"><span>0 hrs</span><span>12 hrs</span><span>24 hrs</span></div></div>
+<button class="submit" type="submit"><span>Show my result</span><span aria-hidden="true">↗</span></button><p class="privacy">Just for fun · Your answers stay in your browser</p>
+</form><div id="result" class="result" role="status" aria-live="polite" aria-atomic="true"><p>Your result will appear here.</p></div></section></main>
+<footer><span>Less overthinking. More studying.</span><span>Made for the semester.</span></footer>
 <script>
 'use strict';
-const TARGET=Date.parse('2026-11-26T17:00:00+05:30');
-function remaining(now){const total=Math.max(0,Math.ceil((TARGET-now)/1000));return {total,days:Math.floor(total/86400),hours:Math.floor(total/3600)%24,minutes:Math.floor(total/60)%60,seconds:total%60};}
-const canvas=document.getElementById('ocean'),ctx=canvas.getContext('2d');
-const motion=matchMedia('(prefers-reduced-motion: reduce)');
-let w=0,h=0,lastSecond=-1,ripples=[],finished=false;
-function resize(){w=innerWidth;h=innerHeight;const dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);}
-addEventListener('resize',resize);resize();
-function update(now){const value=remaining(now);for(const key of ['days','hours','minutes','seconds'])document.getElementById(key).textContent=String(value[key]).padStart(2,'0');if(value.total===0&&!finished){finished=true;document.body.classList.add('finished');document.getElementById('announcement').textContent='The moment is here. The countdown is complete.';}return value.total;}
-
-
-function background(){const g=ctx.createLinearGradient(0,0,0,h);g.addColorStop(0,'#fcfbf8');g.addColorStop(.52,'#faf2e5');g.addColorStop(1,'#f6e5c5');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);}
-function water(t){
- const y=h*.8;
- ctx.save();ctx.beginPath();ctx.moveTo(0,y);
- for(let x=0;x<=w+10;x+=10){const yy=y+Math.sin(x/w*9+t*.0006)*3+Math.sin(x/w*21-t*.0003)*1.5;ctx.lineTo(x,yy);}
- ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();
- const sea=ctx.createLinearGradient(0,y,0,h);sea.addColorStop(0,'#8bcbdb');sea.addColorStop(.12,'#b6dcd8');sea.addColorStop(.6,'#c5dfd6');sea.addColorStop(1,'#e4e6ce');ctx.fillStyle=sea;ctx.fill();ctx.clip();
- const glow=ctx.createRadialGradient(w*.5,y,3,w*.5,y,w*.52);glow.addColorStop(0,'#e7ffffa0');glow.addColorStop(.45,'#c8e8dd22');glow.addColorStop(1,'#86aca300');ctx.fillStyle=glow;ctx.fillRect(0,y-8,w,h);
- for(let i=0;i<34;i++){const yy=y+3+i*i*.22;ctx.beginPath();for(let x=0;x<w+12;x+=12){const v=yy+Math.sin(x/w*24+i*.7+t*.0004)*(1+i*.045);x===0?ctx.moveTo(x,v):ctx.lineTo(x,v);}ctx.strokeStyle=i%3===0?'rgba(255,255,244,.28)':'rgba(35,115,139,.08)';ctx.lineWidth=i%3===0?1.2:.7;ctx.stroke();}ctx.restore();
-}
-function drawRipple(x,y,age){const p=age/3000;if(p<0||p>1)return;const radius=14+p*Math.min(w*.62,650);for(let i=0;i<3;i++){const r=radius-i*9;if(r<=0)continue;ctx.beginPath();ctx.ellipse(x,y,r,r*.135,0,0,Math.PI*2);ctx.strokeStyle='rgba(27,105,136,'+((1-p)*(.32-i*.07))+')';ctx.lineWidth=2.4-i*.6;ctx.stroke();ctx.beginPath();ctx.ellipse(x,y-1.6,r,r*.135,0,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,245,'+((1-p)*.65)+')';ctx.lineWidth=1;ctx.stroke();}}
-function drop(x,y,size,alpha){ctx.save();ctx.translate(x,y);ctx.scale(size,size);ctx.globalAlpha=alpha;ctx.beginPath();ctx.moveTo(0,-1.6);ctx.bezierCurveTo(-.18,-1.05,-.92,-.3,-.92,.25);ctx.bezierCurveTo(-.92,1.36,.92,1.36,.92,.25);ctx.bezierCurveTo(.92,-.3,.18,-1.05,0,-1.6);ctx.closePath();
- const blue=ctx.createRadialGradient(-.4,-.25,.03,.25,.35,1.4);blue.addColorStop(0,'#e4fcff');blue.addColorStop(.2,'#75d5ff');blue.addColorStop(.42,'#1599ed');blue.addColorStop(.7,'#0062b8');blue.addColorStop(1,'#002f64');ctx.fillStyle=blue;ctx.shadowColor='rgba(0,67,115,.2)';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;ctx.clip();
- const rim=ctx.createLinearGradient(-1,0,1,0);rim.addColorStop(0,'#d5ffff99');rim.addColorStop(.2,'#ffffff00');rim.addColorStop(.75,'#ffffff00');rim.addColorStop(1,'#c5ffffaa');ctx.fillStyle=rim;ctx.fillRect(-1,-2,2,4);
- ctx.beginPath();ctx.ellipse(-.34,-.04,.15,.45,.4,0,Math.PI*2);ctx.fillStyle='#ffffffc9';ctx.fill();ctx.beginPath();ctx.ellipse(.26,.7,.35,.07,-.25,0,Math.PI*2);ctx.fillStyle='#70ddffb0';ctx.fill();ctx.restore();}
-function frame(){const now=Date.now(),sec=Math.floor(now/1000),phase=now%1000,impact=720; if(sec!==lastSecond){lastSecond=sec;update(now);}background();water(motion.matches?0:now);
- const x=w*.5,surface=h*.8+4,size=Math.min(44,w*.085,h*.06);
- if(motion.matches){drop(x,surface-size*2.8,size,1);drawRipple(x,surface,1200);}else{
- if(!finished){const p=phase/impact;const cy=phase<impact?surface-size-h*.22*(1-p*p):surface-size+(phase-impact)/280*size*3.5;
- const shadow=ctx.createRadialGradient(x,surface,1,x,surface,size*2);shadow.addColorStop(0,'#246f8845');shadow.addColorStop(1,'#246f8800');ctx.save();ctx.translate(0,surface*.83);ctx.scale(1,.17);ctx.fillStyle=shadow;ctx.fillRect(x-size*2,surface-size*2,size*4,size*4);ctx.restore();
- ctx.save();ctx.beginPath();ctx.rect(0,0,w,surface);ctx.clip();drop(x,cy,size,1);ctx.restore();
- if(phase>=impact){const q=(phase-impact)/280;ctx.save();ctx.beginPath();ctx.rect(0,surface,w,h-surface);ctx.clip();drop(x,cy,size*(1-q*.2),(1-q)*.32);ctx.restore();
- ctx.beginPath();ctx.ellipse(x,surface,size*(.5+q),size*.13,0,0,Math.PI*2);ctx.strokeStyle='rgba(225,255,255,'+(1-q)+')';ctx.lineWidth=3;ctx.stroke();for(let i=0;i<6;i++){const a=Math.PI+i/5*Math.PI,dist=size*(.65+q*1.8);const sx=x+Math.cos(a)*dist,sy=surface+Math.sin(a)*size*1.1*Math.sin(q*Math.PI)+q*8;drop(sx,sy,size*.08*(1-q),1-q);}}
- }
- for(let i=0;i<4;i++){const age=phase-impact+i*1000;if(age>=0&&(!finished||now<TARGET+3000))drawRipple(x,surface,age);}}
- requestAnimationFrame(frame);}
-update(Date.now());requestAnimationFrame(frame);
-</script>
-</body>
-</html>
+function checkResult(name,cgpa,hours){const normalized=name.trim().toLowerCase();if(normalized==='abhijeet'||normalized==='abijeet')return true;if(normalized==='shawn')return false;return cgpa>=3&&hours>0;}
+const form=document.getElementById('checker'),nameInput=document.getElementById('name'),hours=document.getElementById('hours'),result=document.getElementById('result');
+function clearResult(){result.className='result';result.innerHTML='<p>Your result will appear here.</p>';}
+form.addEventListener('input',()=>{nameInput.setCustomValidity('');document.getElementById('hours-value').textContent=hours.value+(hours.value==='1'?' hr':' hrs');hours.setAttribute('aria-valuetext',hours.value+' hours per day');clearResult();});
+form.addEventListener('change',clearResult);
+form.addEventListener('submit',event=>{event.preventDefault();nameInput.setCustomValidity(nameInput.value.trim()?'':'Please enter your name.');if(!form.reportValidity())return;const pass=checkResult(nameInput.value,Number(document.getElementById('cgpa').value),Number(hours.value));result.className='result '+(pass?'pass':'fail');result.replaceChildren();const text=document.createElement('strong');text.textContent=pass?'pass':'lode laggaye';result.appendChild(text);});
+</script></body></html>
